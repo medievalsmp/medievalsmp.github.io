@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>MedievalSMP</title>
 
-<!-- Lunar-like font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -16,31 +15,54 @@
 
 body {
     height: 100vh;
-    font-family: 'Inter', sans-serif;
+    background:
+        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.9)),
+        url("background.jpg") center/cover no-repeat;
     overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: white;
+}
+
+/* TOP BAR */
+.top-bar {
+    position: absolute;
+    top: 20px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-
-    /* BACKGROUND IMAGE */
-    background: 
-        linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.85)),
-        url("background.jpg");
-    background-size: cover;
-    background-position: center;
+    z-index: 5;
 }
 
-/* MAIN */
+.nav-btn {
+    padding: 10px 26px;
+    font-weight: 600;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-btn:hover {
+    background: rgba(255,255,255,0.16);
+}
+
+/* CENTER */
 .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     z-index: 2;
+    position: relative;
 }
 
-/* LOGO */
 .logo {
     width: 160px;
-    margin-bottom: 20px;
     filter: brightness(0) invert(1);
+    margin-bottom: 18px;
     animation: float 4s ease-in-out infinite;
 }
 
@@ -49,73 +71,66 @@ body {
     50% { transform: translateY(-10px); }
 }
 
-/* TITLE (LUNAR STYLE) */
 .title {
     font-size: 64px;
     font-weight: 800;
-    letter-spacing: 2px;
-    color: #ffffff;
-    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 
-/* SUBTITLE */
 .subtitle {
     margin-top: 6px;
     font-size: 18px;
-    font-weight: 500;
-    color: #d6dcff;
-    letter-spacing: 0.8px;
-    margin-bottom: 32px;
-    opacity: 0.9;
+    opacity: 0.85;
+    margin-bottom: 30px;
+}
+
+/* PLAYER COUNT */
+.player-box {
+    margin-bottom: 24px;
+    padding: 10px 22px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    font-weight: 600;
 }
 
 /* BUTTONS */
 .buttons {
     display: flex;
-    justify-content: center;
-    gap: 16px;
+    gap: 14px;
 }
 
-/* GENERAL BUTTON */
 .btn {
-    padding: 14px 36px;
-    font-size: 16px;
-    font-weight: 700;
-    border: none;
+    padding: 14px 28px;
     border-radius: 40px;
+    border: none;
     cursor: pointer;
-    color: white;
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: all 0.25s ease;
+    transition: 0.3s;
 }
 
-/* JOIN */
-.join-btn {
-    background: linear-gradient(135deg, #8f6bff, #5e46ff);
-    box-shadow: 0 12px 35px rgba(100,80,255,0.45);
+.join {
+    background: linear-gradient(135deg,#9f6bff,#6a4cff);
+    color: white;
 }
 
-.join-btn:hover {
+.discord {
+    background: linear-gradient(135deg,#5865F2,#404EED);
+    color: white;
+}
+
+.btn:hover {
     transform: translateY(-3px);
 }
 
-/* DISCORD */
-.discord-btn {
-    background: linear-gradient(135deg, #5865F2, #404EED);
-    box-shadow: 0 12px 35px rgba(88,101,242,0.45);
-}
-
-.discord-btn:hover {
-    transform: translateY(-3px);
-}
-
-/* POPUP */
+/* POPUPS */
 .popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.65);
     display: none;
     justify-content: center;
     align-items: center;
@@ -123,127 +138,122 @@ body {
 }
 
 .popup-box {
-    background: #0e1020;
-    padding: 32px 42px;
+    background: #0f1020;
+    padding: 30px 40px;
     border-radius: 18px;
     text-align: center;
-    animation: popup 0.3s ease;
-}
-
-@keyframes popup {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    width: 320px;
 }
 
 .popup-box h2 {
-    color: white;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .popup-box p {
-    color: #cfd6ff;
+    opacity: 0.9;
     margin: 6px 0;
 }
 
-.close-btn {
-    margin-top: 18px;
-    padding: 8px 22px;
-    border: none;
+.copy-btn {
+    margin-top: 10px;
+    padding: 8px 18px;
     border-radius: 20px;
-    background: #5e46ff;
+    border: none;
+    background: #6a4cff;
     color: white;
-    font-weight: 700;
     cursor: pointer;
+    font-weight: 600;
 }
 
 /* SNOW */
 .snowflake {
     position: fixed;
     top: -10px;
-    color: white;
-    opacity: 0.7;
     pointer-events: none;
-    animation-name: fall, sway;
-    animation-timing-function: linear, ease-in-out;
+    opacity: 0.75;
+    animation: fall linear;
 }
 
 @keyframes fall {
     to { transform: translateY(110vh); }
-}
-
-@keyframes sway {
-    0%,100% { margin-left: 0; }
-    50% { margin-left: 30px; }
 }
 </style>
 </head>
 
 <body>
 
+<div class="top-bar">
+    <div class="nav-btn" onclick="openVC()">DOWNLOAD VC</div>
+</div>
+
 <div class="container">
     <img src="logo.png" class="logo">
     <div class="title">MEDIEVALSMP</div>
     <div class="subtitle">The server u need!</div>
 
+    <div class="player-box">
+        🟢 Online Players: <strong>27</strong>
+    </div>
+
     <div class="buttons">
-        <button class="btn join-btn" onclick="openServer()">JOIN NOW</button>
-        <button class="btn discord-btn" onclick="openDiscord()">DISCORD</button>
+        <button class="btn join" onclick="openJoin()">
+            ⛏ JOIN NOW
+        </button>
+        <button class="btn discord" onclick="openDiscord()">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" width="18" style="filter:invert(1)">
+            DISCORD
+        </button>
     </div>
 </div>
 
-<!-- SERVER POPUP -->
-<div class="popup" id="server">
+<!-- JOIN -->
+<div class="popup" id="join">
     <div class="popup-box">
         <h2>Join MedievalSMP</h2>
-        <p><b>IP:</b> MedievalSE3x.aternos.me</p>
-        <p><b>Port:</b> 38975</p>
-        <p>Java & Bedrock Supported</p>
-        <button class="close-btn" onclick="closeAll()">Close</button>
+        <p>IP: MedievalSE3x.aternos.me</p>
+        <p>Port: 38975</p>
+        <button class="copy-btn" onclick="copyText('MedievalSE3x.aternos.me')">Copy IP</button>
     </div>
 </div>
 
-<!-- DISCORD POPUP -->
+<!-- DISCORD -->
 <div class="popup" id="discord">
     <div class="popup-box">
         <h2>Join our Discord</h2>
         <p>https://discord.gg/zvMqUczj</p>
-        <button class="close-btn" onclick="closeAll()">Close</button>
+        <button class="copy-btn" onclick="copyText('https://discord.gg/zvMqUczj')">Copy Link</button>
+    </div>
+</div>
+
+<!-- VC -->
+<div class="popup" id="vc">
+    <div class="popup-box">
+        <h2>Download Voice Chat</h2>
+        <p>1. Install Simple Voice Chat mod</p>
+        <p>2. Use Fabric / Forge</p>
+        <p>3. Join server & configure mic</p>
+        <p>(More coming soon)</p>
     </div>
 </div>
 
 <script>
-function openServer() {
-    document.getElementById("server").style.display = "flex";
-}
-function openDiscord() {
-    document.getElementById("discord").style.display = "flex";
-}
-function closeAll() {
-    document.getElementById("server").style.display = "none";
-    document.getElementById("discord").style.display = "none";
-}
+function openJoin(){show('join')}
+function openDiscord(){show('discord')}
+function openVC(){show('vc')}
+function show(id){document.getElementById(id).style.display='flex'}
+function copyText(t){navigator.clipboard.writeText(t)}
 
-/* Snow creation (safe & optimized) */
-function createSnowflake() {
-    const s = document.createElement("div");
-    s.className = "snowflake";
-    s.innerHTML = "❄";
-
-    const size = Math.random() * 10 + 8;
-    const duration = Math.random() * 6 + 6;
-
-    s.style.left = Math.random() * window.innerWidth + "px";
-    s.style.fontSize = size + "px";
-    s.style.opacity = Math.random() * 0.5 + 0.3;
-    s.style.animationDuration = duration + "s, 4s";
-
+setInterval(()=>{
+    const s=document.createElement("div");
+    s.className="snowflake";
+    s.innerHTML="❄";
+    s.style.left=Math.random()*window.innerWidth+"px";
+    s.style.fontSize=(Math.random()*10+8)+"px";
+    s.style.animationDuration=(Math.random()*6+6)+"s";
     document.body.appendChild(s);
-    setTimeout(() => s.remove(), duration * 1000);
-}
-
-setInterval(createSnowflake, 140);
+    setTimeout(()=>s.remove(),8000);
+},130);
 </script>
 
 </body>
 </html>
-
