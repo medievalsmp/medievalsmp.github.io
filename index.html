@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>MedievalSMP</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+<!-- Lunar-like font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -15,24 +16,30 @@
 
 body {
     height: 100vh;
-    background: radial-gradient(circle at top, #0b0b14, #000);
+    font-family: 'Inter', sans-serif;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Montserrat', sans-serif;
+
+    /* BACKGROUND IMAGE */
+    background: 
+        linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.85)),
+        url("background.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
-/* CONTAINER */
+/* MAIN */
 .container {
     text-align: center;
     z-index: 2;
 }
 
-/* LOGO – PURE WHITE */
+/* LOGO */
 .logo {
-    width: 165px;
-    margin-bottom: 18px;
+    width: 160px;
+    margin-bottom: 20px;
     filter: brightness(0) invert(1);
     animation: float 4s ease-in-out infinite;
 }
@@ -42,11 +49,11 @@ body {
     50% { transform: translateY(-10px); }
 }
 
-/* TITLE */
+/* TITLE (LUNAR STYLE) */
 .title {
     font-size: 64px;
     font-weight: 800;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     color: #ffffff;
     text-transform: uppercase;
 }
@@ -56,8 +63,8 @@ body {
     margin-top: 6px;
     font-size: 18px;
     font-weight: 500;
-    color: #cfd6ff;
-    letter-spacing: 1px;
+    color: #d6dcff;
+    letter-spacing: 0.8px;
     margin-bottom: 32px;
     opacity: 0.9;
 }
@@ -65,36 +72,36 @@ body {
 /* BUTTONS */
 .buttons {
     display: flex;
-    gap: 16px;
     justify-content: center;
+    gap: 16px;
 }
 
+/* GENERAL BUTTON */
 .btn {
-    padding: 14px 34px;
+    padding: 14px 36px;
     font-size: 16px;
     font-weight: 700;
-    color: #fff;
     border: none;
     border-radius: 40px;
     cursor: pointer;
+    color: white;
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
-/* JOIN BUTTON */
+/* JOIN */
 .join-btn {
-    background: linear-gradient(135deg, #9d6bff, #6a4cff);
-    box-shadow: 0 12px 35px rgba(120,80,255,0.45);
+    background: linear-gradient(135deg, #8f6bff, #5e46ff);
+    box-shadow: 0 12px 35px rgba(100,80,255,0.45);
 }
 
 .join-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 18px 50px rgba(150,110,255,0.65);
 }
 
-/* DISCORD BUTTON */
+/* DISCORD */
 .discord-btn {
     background: linear-gradient(135deg, #5865F2, #404EED);
     box-shadow: 0 12px 35px rgba(88,101,242,0.45);
@@ -102,14 +109,13 @@ body {
 
 .discord-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 18px 50px rgba(88,101,242,0.65);
 }
 
 /* POPUP */
 .popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.7);
     display: none;
     justify-content: center;
     align-items: center;
@@ -117,37 +123,35 @@ body {
 }
 
 .popup-box {
-    background: #0f1020;
+    background: #0e1020;
     padding: 32px 42px;
     border-radius: 18px;
     text-align: center;
-    box-shadow: 0 0 60px rgba(150,110,255,0.45);
-    animation: popupIn 0.35s ease;
+    animation: popup 0.3s ease;
 }
 
-@keyframes popupIn {
-    from { transform: scale(0.85); opacity: 0; }
+@keyframes popup {
+    from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
 
 .popup-box h2 {
-    color: #fff;
-    margin-bottom: 14px;
+    color: white;
+    margin-bottom: 12px;
 }
 
 .popup-box p {
     color: #cfd6ff;
-    font-size: 16px;
-    margin: 8px 0;
+    margin: 6px 0;
 }
 
 .close-btn {
-    margin-top: 20px;
-    padding: 8px 24px;
+    margin-top: 18px;
+    padding: 8px 22px;
     border: none;
     border-radius: 20px;
-    background: #6a4cff;
-    color: #fff;
+    background: #5e46ff;
+    color: white;
     font-weight: 700;
     cursor: pointer;
 }
@@ -177,72 +181,69 @@ body {
 <body>
 
 <div class="container">
-    <img src="logo.png" class="logo" alt="MedievalSMP Logo">
+    <img src="logo.png" class="logo">
     <div class="title">MEDIEVALSMP</div>
     <div class="subtitle">The server u need!</div>
 
     <div class="buttons">
-        <button class="btn join-btn" onclick="openServerPopup()">JOIN NOW</button>
-        <button class="btn discord-btn" onclick="openDiscordPopup()">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" width="18" style="filter: invert(1);">
-            DISCORD
-        </button>
+        <button class="btn join-btn" onclick="openServer()">JOIN NOW</button>
+        <button class="btn discord-btn" onclick="openDiscord()">DISCORD</button>
     </div>
 </div>
 
 <!-- SERVER POPUP -->
-<div class="popup" id="serverPopup">
+<div class="popup" id="server">
     <div class="popup-box">
         <h2>Join MedievalSMP</h2>
-        <p><strong>Server IP:</strong> MedievalSE3x.aternos.me</p>
-        <p><strong>Port:</strong> 38975</p>
-        <p>Join Any Version<br>🟢 Java & Bedrock</p>
-        <button class="close-btn" onclick="closePopups()">Close</button>
+        <p><b>IP:</b> MedievalSE3x.aternos.me</p>
+        <p><b>Port:</b> 38975</p>
+        <p>Java & Bedrock Supported</p>
+        <button class="close-btn" onclick="closeAll()">Close</button>
     </div>
 </div>
 
 <!-- DISCORD POPUP -->
-<div class="popup" id="discordPopup">
+<div class="popup" id="discord">
     <div class="popup-box">
         <h2>Join our Discord</h2>
         <p>https://discord.gg/zvMqUczj</p>
-        <button class="close-btn" onclick="closePopups()">Close</button>
+        <button class="close-btn" onclick="closeAll()">Close</button>
     </div>
 </div>
 
 <script>
-function openServerPopup() {
-    document.getElementById("serverPopup").style.display = "flex";
+function openServer() {
+    document.getElementById("server").style.display = "flex";
+}
+function openDiscord() {
+    document.getElementById("discord").style.display = "flex";
+}
+function closeAll() {
+    document.getElementById("server").style.display = "none";
+    document.getElementById("discord").style.display = "none";
 }
 
-function openDiscordPopup() {
-    document.getElementById("discordPopup").style.display = "flex";
-}
-
-function closePopups() {
-    document.getElementById("serverPopup").style.display = "none";
-    document.getElementById("discordPopup").style.display = "none";
-}
-
+/* Snow creation (safe & optimized) */
 function createSnowflake() {
-    const snow = document.createElement("div");
-    snow.className = "snowflake";
-    snow.innerHTML = "❄";
+    const s = document.createElement("div");
+    s.className = "snowflake";
+    s.innerHTML = "❄";
 
     const size = Math.random() * 10 + 8;
     const duration = Math.random() * 6 + 6;
 
-    snow.style.left = Math.random() * window.innerWidth + "px";
-    snow.style.fontSize = size + "px";
-    snow.style.opacity = Math.random() * 0.5 + 0.3;
-    snow.style.animationDuration = duration + "s, 4s";
+    s.style.left = Math.random() * window.innerWidth + "px";
+    s.style.fontSize = size + "px";
+    s.style.opacity = Math.random() * 0.5 + 0.3;
+    s.style.animationDuration = duration + "s, 4s";
 
-    document.body.appendChild(snow);
-    setTimeout(() => snow.remove(), duration * 1000);
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), duration * 1000);
 }
 
-setInterval(createSnowflake, 130);
+setInterval(createSnowflake, 140);
 </script>
 
 </body>
 </html>
+
