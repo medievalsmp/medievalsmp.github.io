@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>MedievalSMP</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -15,54 +15,57 @@
 
 body {
     height: 100vh;
-    background:
-        linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.9)),
-        url("background.jpg") center/cover no-repeat;
+    background: url("background.jpg") center/cover no-repeat fixed;
     overflow: hidden;
-    font-family: 'Inter', sans-serif;
-    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* DARK OVERLAY */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 0;
 }
 
 /* TOP BAR */
 .top-bar {
-    position: absolute;
+    position: fixed;
     top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 5;
+    right: 30px;
+    z-index: 3;
 }
 
-.nav-btn {
-    padding: 10px 26px;
-    font-weight: 600;
+.top-btn {
+    padding: 10px 22px;
     border-radius: 30px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.25);
     cursor: pointer;
     transition: 0.3s;
 }
 
-.nav-btn:hover {
-    background: rgba(255,255,255,0.16);
+.top-btn:hover {
+    background: rgba(255,255,255,0.2);
 }
 
-/* CENTER */
+/* CENTER CONTENT */
 .container {
+    position: relative;
+    z-index: 2;
     height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    z-index: 2;
-    position: relative;
 }
 
 .logo {
     width: 160px;
     filter: brightness(0) invert(1);
-    margin-bottom: 18px;
     animation: float 4s ease-in-out infinite;
 }
 
@@ -72,54 +75,45 @@ body {
 }
 
 .title {
+    margin-top: 15px;
     font-size: 64px;
     font-weight: 800;
+    color: white;
     letter-spacing: 3px;
 }
 
 .subtitle {
-    margin-top: 6px;
+    color: #cfd6ff;
     font-size: 18px;
-    opacity: 0.85;
-    margin-bottom: 30px;
-}
-
-/* PLAYER COUNT */
-.player-box {
-    margin-bottom: 24px;
-    padding: 10px 22px;
-    border-radius: 20px;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(6px);
-    font-weight: 600;
+    margin: 6px 0 28px;
 }
 
 /* BUTTONS */
 .buttons {
     display: flex;
-    gap: 14px;
+    gap: 16px;
+    justify-content: center;
 }
 
 .btn {
-    padding: 14px 28px;
+    padding: 14px 36px;
     border-radius: 40px;
+    font-weight: 700;
     border: none;
     cursor: pointer;
-    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
+    color: white;
     transition: 0.3s;
 }
 
-.join {
-    background: linear-gradient(135deg,#9f6bff,#6a4cff);
-    color: white;
+.join-btn {
+    background: linear-gradient(135deg, #9d6bff, #6a4cff);
 }
 
-.discord {
-    background: linear-gradient(135deg,#5865F2,#404EED);
-    color: white;
+.discord-btn {
+    background: linear-gradient(135deg, #5865F2, #404EED);
 }
 
 .btn:hover {
@@ -130,7 +124,7 @@ body {
 .popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.7);
     display: none;
     justify-content: center;
     align-items: center;
@@ -142,36 +136,52 @@ body {
     padding: 30px 40px;
     border-radius: 18px;
     text-align: center;
-    width: 320px;
+    max-width: 90%;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .popup-box h2 {
-    margin-bottom: 10px;
+    color: white;
+    margin-bottom: 14px;
 }
 
 .popup-box p {
-    opacity: 0.9;
-    margin: 6px 0;
+    color: #cfd6ff;
+    margin: 8px 0;
+}
+
+.copy-btn, .close-btn {
+    margin-top: 14px;
+    padding: 8px 22px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
 }
 
 .copy-btn {
-    margin-top: 10px;
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: none;
+    background: #5865F2;
+    color: white;
+}
+
+.close-btn {
     background: #6a4cff;
     color: white;
-    cursor: pointer;
-    font-weight: 600;
 }
 
 /* SNOW */
 .snowflake {
     position: fixed;
     top: -10px;
+    color: white;
+    opacity: 0.7;
     pointer-events: none;
-    opacity: 0.75;
-    animation: fall linear;
+    animation: fall linear forwards;
 }
 
 @keyframes fall {
@@ -183,45 +193,45 @@ body {
 <body>
 
 <div class="top-bar">
-    <div class="nav-btn" onclick="openVC()">DOWNLOAD VC</div>
+    <button class="top-btn" onclick="openPopup('vc')">DOWNLOAD VC</button>
 </div>
 
 <div class="container">
-    <img src="logo.png" class="logo">
-    <div class="title">MEDIEVALSMP</div>
-    <div class="subtitle">The server u need!</div>
+    <div>
+        <img src="logo.png" class="logo">
+        <div class="title">MEDIEVALSMP</div>
+        <div class="subtitle">The server u need!</div>
 
-    <div class="player-box">
-        🟢 Online Players: <strong>27</strong>
-    </div>
-
-    <div class="buttons">
-        <button class="btn join" onclick="openJoin()">
-            ⛏ JOIN NOW
-        </button>
-        <button class="btn discord" onclick="openDiscord()">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" width="18" style="filter:invert(1)">
-            DISCORD
-        </button>
+        <div class="buttons">
+            <button class="btn join-btn" onclick="openPopup('server')">JOIN NOW</button>
+            <button class="btn discord-btn" onclick="openPopup('discord')">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" width="18" style="filter:invert(1)">
+                DISCORD
+            </button>
+        </div>
     </div>
 </div>
 
-<!-- JOIN -->
-<div class="popup" id="join">
+<!-- SERVER -->
+<div class="popup" id="server">
     <div class="popup-box">
         <h2>Join MedievalSMP</h2>
         <p>IP: MedievalSE3x.aternos.me</p>
         <p>Port: 38975</p>
         <button class="copy-btn" onclick="copyText('MedievalSE3x.aternos.me')">Copy IP</button>
+        <br>
+        <button class="close-btn" onclick="closePopups()">Close</button>
     </div>
 </div>
 
 <!-- DISCORD -->
 <div class="popup" id="discord">
     <div class="popup-box">
-        <h2>Join our Discord</h2>
+        <h2>Discord</h2>
         <p>https://discord.gg/zvMqUczj</p>
         <button class="copy-btn" onclick="copyText('https://discord.gg/zvMqUczj')">Copy Link</button>
+        <br>
+        <button class="close-btn" onclick="closePopups()">Close</button>
     </div>
 </div>
 
@@ -229,30 +239,45 @@ body {
 <div class="popup" id="vc">
     <div class="popup-box">
         <h2>Download Voice Chat</h2>
-        <p>1. Install Simple Voice Chat mod</p>
-        <p>2. Use Fabric / Forge</p>
-        <p>3. Join server & configure mic</p>
-        <p>(More coming soon)</p>
+        <p>1. Install Fabric or Forge</p>
+        <p>2. Download Simple Voice Chat mod</p>
+        <p>3. Put it in your mods folder</p>
+        <p>4. Launch Minecraft & join the server</p>
+        <button class="close-btn" onclick="closePopups()">Close</button>
     </div>
 </div>
 
 <script>
-function openJoin(){show('join')}
-function openDiscord(){show('discord')}
-function openVC(){show('vc')}
-function show(id){document.getElementById(id).style.display='flex'}
-function copyText(t){navigator.clipboard.writeText(t)}
+function openPopup(id) {
+    document.getElementById(id).style.display = "flex";
+}
 
-setInterval(()=>{
-    const s=document.createElement("div");
-    s.className="snowflake";
-    s.innerHTML="❄";
-    s.style.left=Math.random()*window.innerWidth+"px";
-    s.style.fontSize=(Math.random()*10+8)+"px";
-    s.style.animationDuration=(Math.random()*6+6)+"s";
+function closePopups() {
+    document.querySelectorAll(".popup").forEach(p => p.style.display = "none");
+}
+
+document.querySelectorAll(".popup").forEach(popup => {
+    popup.addEventListener("click", e => {
+        if (e.target === popup) closePopups();
+    });
+});
+
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copied!");
+}
+
+function snow() {
+    const s = document.createElement("div");
+    s.className = "snowflake";
+    s.innerHTML = "❄";
+    s.style.left = Math.random()*window.innerWidth+"px";
+    s.style.fontSize = Math.random()*10+8+"px";
+    s.style.animationDuration = Math.random()*5+6+"s";
     document.body.appendChild(s);
     setTimeout(()=>s.remove(),8000);
-},130);
+}
+setInterval(snow,150);
 </script>
 
 </body>
