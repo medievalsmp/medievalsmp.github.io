@@ -1,249 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Medieval SMP</title>
+<meta charset="UTF-8">
+<title>MedievalSMP</title>
 
-  <!-- Clean professional font (Lunar-like) -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    body {
-      min-height: 100vh;
-      background: url('01edfa495abe8560a969185dd92c9fc1.jpg') center/cover no-repeat fixed;
-      color: white;
-      overflow-x: hidden;
-    }
+body {
+    height: 100vh;
+    background: url("background.jpg") center/cover no-repeat fixed;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
 
-    /* LOADER (FIXED) */
-    #loader {
-      position: fixed;
-      inset: 0;
-      background: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+/* DARK OVERLAY */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 0;
+}
 
-    #loader.hide {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease;
-    }
+/* TOP BAR */
+.top-bar {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    z-index: 3;
+}
 
-    #loader h1 {
-      font-size: 2.3rem;
-      letter-spacing: 3px;
-      animation: pulse 1.5s infinite;
-    }
+.top-btn {
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    @keyframes pulse {
-      0% { opacity: .3 }
-      50% { opacity: 1 }
-      100% { opacity: .3 }
-    }
+.top-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
 
-    /* SNOWFLAKES (SAFE – NO OVERLOAD) */
-    .snowflake {
-      position: fixed;
-      top: -10px;
-      color: white;
-      opacity: 0.8;
-      user-select: none;
-      animation: fall linear forwards;
-      pointer-events: none;
-    }
+/* CENTER CONTENT */
+.container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
-    }
+.logo {
+    width: 160px;
+    filter: brightness(0) invert(1);
+    animation: float 4s ease-in-out infinite;
+}
 
-    /* HEADER */
-    header {
-      padding: 25px 40px;
-      display: flex;
-      justify-content: flex-end;
-    }
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
 
-    .nav-btn {
-      cursor: pointer;
-      font-weight: 700;
-      letter-spacing: 1px;
-      opacity: 0.9;
-      transition: opacity .3s ease;
-    }
+.title {
+    margin-top: 15px;
+    font-size: 64px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 3px;
+}
 
-    .nav-btn:hover { opacity: 1 }
+.subtitle {
+    color: #cfd6ff;
+    font-size: 18px;
+    margin: 6px 0 28px;
+}
 
-    /* MAIN */
-    .center {
-      min-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      backdrop-filter: blur(3px);
-    }
+/* BUTTONS */
+.buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
 
-    .logo-text {
-      width: 280px;
-      margin-bottom: 30px;
-    }
+.btn {
+    padding: 14px 36px;
+    border-radius: 40px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    transition: 0.3s;
+}
 
-    .buttons {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+.join-btn {
+    background: linear-gradient(135deg, #9d6bff, #6a4cff);
+}
 
-    .btn {
-      padding: 14px 30px;
-      border-radius: 10px;
-      border: none;
-      background: rgba(255,255,255,0.12);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: all .3s ease;
-    }
+.discord-btn {
+    background: linear-gradient(135deg, #5865F2, #404EED);
+}
 
-    .btn:hover {
-      background: rgba(255,255,255,0.25);
-      transform: translateY(-2px);
-    }
+.btn:hover {
+    transform: translateY(-3px);
+}
 
-    /* MODALS */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 5000;
-    }
+/* POPUPS */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
 
-    .modal-content {
-      background: #0e0e0e;
-      padding: 28px;
-      border-radius: 14px;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      animation: zoom .3s ease;
-    }
+.popup-box {
+    background: #0f1020;
+    padding: 30px 40px;
+    border-radius: 18px;
+    text-align: center;
+    max-width: 90%;
+    animation: pop 0.3s ease;
+}
 
-    @keyframes zoom {
-      from { transform: scale(.85); opacity: 0 }
-      to { transform: scale(1); opacity: 1 }
-    }
+@keyframes pop {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
 
-    .close {
-      margin-top: 18px;
-      cursor: pointer;
-      opacity: 0.7;
-    }
+.popup-box h2 {
+    color: white;
+    margin-bottom: 14px;
+}
 
-    .close:hover { opacity: 1 }
+.popup-box p {
+    color: #cfd6ff;
+    margin: 8px 0;
+}
 
-    /* MOBILE */
-    @media (max-width: 600px) {
-      .logo-text { width: 220px }
-      header { justify-content: center }
-    }
-  </style>
+.copy-btn, .close-btn {
+    margin-top: 14px;
+    padding: 8px 22px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.copy-btn {
+    background: #5865F2;
+    color: white;
+}
+
+.close-btn {
+    background: #6a4cff;
+    color: white;
+}
+
+/* SNOW */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+</style>
 </head>
+
 <body>
 
-<!-- LOADER -->
-<div id="loader"><h1>MEDIEVAL SMP</h1></div>
-
-<!-- HEADER -->
-<header>
-  <div class="nav-btn" onclick="openModal('vc')">DOWNLOAD VC</div>
-</header>
-
-<!-- MAIN CONTENT -->
-<div class="center">
-  <img src="Gemini_Generated_Image_lxqe9rlxqe9rlxqe-removebg-preview.png" class="logo-text" alt="Medieval SMP" />
-
-  <div class="buttons">
-    <button class="btn" onclick="openModal('join')">JOIN NOW</button>
-    <button class="btn" onclick="openModal('discord')">DISCORD</button>
-  </div>
+<div class="top-bar">
+    <button class="top-btn" onclick="openPopup('vc')">DOWNLOAD VC</button>
 </div>
 
-<!-- JOIN MODAL -->
-<div class="modal" id="join">
-  <div class="modal-content">
-    <h2>Server Info</h2>
-    <p>IP: MedievalSE3x.aternos.me</p>
-    <p>Port: 38975</p>
-    <p>Java & Bedrock Supported</p>
-    <div class="close" onclick="closeModal('join')">Close</div>
-  </div>
+<div class="container">
+    <div>
+        <img src="logo.png" class="logo">
+        <div class="title">MEDIEVALSMP</div>
+        <div class="subtitle">The server u need!</div>
+
+        <div class="buttons">
+            <button class="btn join-btn" onclick="openPopup('server')">JOIN NOW</button>
+            <button class="btn discord-btn" onclick="openPopup('discord')">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" width="18" style="filter:invert(1)">
+                DISCORD
+            </button>
+        </div>
+    </div>
 </div>
 
-<!-- DISCORD MODAL -->
-<div class="modal" id="discord">
-  <div class="modal-content">
-    <h2>Discord</h2>
-    <p>https://discord.gg/zvMqUczj</p>
-    <div class="close" onclick="closeModal('discord')">Close</div>
-  </div>
+<!-- SERVER -->
+<div class="popup" id="server">
+    <div class="popup-box">
+        <h2>Join MedievalSMP</h2>
+        <p>IP: MedievalSE3x.aternos.me</p>
+        <p>Port: 38975</p>
+        <button class="copy-btn" onclick="copyText('MedievalSE3x.aternos.me')">Copy IP</button>
+        <br>
+        <button class="close-btn" onclick="closePopups()">Close</button>
+    </div>
 </div>
 
-<!-- VC MODAL -->
-<div class="modal" id="vc">
-  <div class="modal-content">
-    <h2>Download Voice Chat</h2>
-    <p>Install Simple Voice Chat.</p>
-    <p>Java: CurseForge / Modrinth</p>
-    <p>Bedrock: Built-in support</p>
-    <div class="close" onclick="closeModal('vc')">Close</div>
-  </div>
+<!-- DISCORD -->
+<div class="popup" id="discord">
+    <div class="popup-box">
+        <h2>Discord</h2>
+        <p>https://discord.gg/zvMqUczj</p>
+        <button class="copy-btn" onclick="copyText('https://discord.gg/zvMqUczj')">Copy Link</button>
+        <br>
+        <button class="close-btn" onclick="closePopups()">Close</button>
+    </div>
+</div>
+
+<!-- VC -->
+<div class="popup" id="vc">
+    <div class="popup-box">
+        <h2>Download Voice Chat</h2>
+        <p>1. Install Fabric or Forge</p>
+        <p>2. Download Simple Voice Chat mod</p>
+        <p>3. Put it in your mods folder</p>
+        <p>4. Launch Minecraft & join the server</p>
+        <button class="close-btn" onclick="closePopups()">Close</button>
+    </div>
 </div>
 
 <script>
-  /* FIX: Loader removal AFTER page loads */
-  window.addEventListener('load', () => {
-    document.getElementById('loader').classList.add('hide');
-  });
+function openPopup(id) {
+    document.getElementById(id).style.display = "flex";
+}
 
-  /* Snowflakes – auto removed (NO MEMORY LEAK) */
-  setInterval(() => {
-    const snow = document.createElement('div');
-    snow.className = 'snowflake';
-    snow.textContent = '❄';
-    snow.style.left = Math.random() * window.innerWidth + 'px';
-    snow.style.fontSize = Math.random() * 10 + 10 + 'px';
-    snow.style.animationDuration = Math.random() * 5 + 6 + 's';
-    document.body.appendChild(snow);
-    setTimeout(() => snow.remove(), 12000);
-  }, 350);
+function closePopups() {
+    document.querySelectorAll(".popup").forEach(p => p.style.display = "none");
+}
 
-  function openModal(id) {
-    document.getElementById(id).style.display = 'flex';
-  }
+document.querySelectorAll(".popup").forEach(popup => {
+    popup.addEventListener("click", e => {
+        if (e.target === popup) closePopups();
+    });
+});
 
-  function closeModal(id) {
-    document.getElementById(id).style.display = 'none';
-  }
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copied!");
+}
+
+function snow() {
+    const s = document.createElement("div");
+    s.className = "snowflake";
+    s.innerHTML = "❄";
+    s.style.left = Math.random()*window.innerWidth+"px";
+    s.style.fontSize = Math.random()*10+8+"px";
+    s.style.animationDuration = Math.random()*5+6+"s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),8000);
+}
+setInterval(snow,150);
 </script>
 
 </body>
