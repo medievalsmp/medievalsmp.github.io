@@ -233,17 +233,15 @@
 
     /* DARK DISCORD BUTTON WITH LOGO SUPPORT */
     /* This ensures the icon is visible and spaced correctly */
-.btn-secondary i {
-  font-size: 1.2rem;
-  vertical-align: middle;
-  margin-right: 8px; /* Adds space between logo and the word DISCORD */
-     color: white !important;                                                                                                                                            
+.btn-secondary { 
+      background: #3f4147 !important; 
+      color: white !important; 
       display: inline-flex;
       align-items: center;
       gap: 10px;
       border: none;
-      padding: 14px 34px;
-      border-radius: 14px;
+      padding: 14px 30px;
+      border-radius: 10px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -269,8 +267,10 @@
     <p>Join the ultimate medieval battlefield. Build your kingdom, master custom enchants, and dominate your enemies.</p>
 
     <div class="actions">
-      <button class="btn btn-primary" onclick="copyIP('play.medievalsmp.com')">COPY JAVA IP</button>
-      <button class="btn btn-secondary" onclick="window.open('https://discord.gg/yourlink')">DISCORD</button>
+      <button class="btn btn-primary" onclick="copyIP('MedievalSE3x.aternos.me')">COPY JAVA IP</button>
+     <button class="btn-secondary" onclick="window.open('https://discord.gg/yourlink')">
+        <i class="fa-brands fa-discord"></i> DISCORD
+      </button>
     </div>
 
     <div class="ip-list">
@@ -357,6 +357,7 @@
 
 </body>
 </html>
+
 
 
 
