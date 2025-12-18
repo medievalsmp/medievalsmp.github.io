@@ -6,7 +6,7 @@
   <title>MedievalSMP</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -218,6 +218,36 @@
     @media (max-width: 768px) {
       .rules-container { grid-template-columns: 1fr; }
     }
+    /* PROFESSIONAL PURPLE BUTTON */
+    .btn-primary { 
+      background: linear-gradient(135deg, #7b5cff, #a855f7) !important; 
+      color: white !important; 
+      box-shadow: 0 12px 35px rgba(123,92,255,0.45);
+      border: none;
+      padding: 14px 34px;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .25s ease;
+    }
+
+    /* DARK DISCORD BUTTON WITH LOGO SUPPORT */
+    .btn-secondary { 
+      background: #3f4147 !important; 
+      color: white !important; 
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      padding: 14px 34px;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover, .btn-secondary:hover {
+      transform: translateY(-3px);
+    }
   </style>
 </head>
 <body>
@@ -324,6 +354,7 @@
 
 </body>
 </html>
+
 
 
 
