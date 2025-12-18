@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* --- ORIGINAL STYLES --- */
     * {
       margin: 0;
       padding: 0;
@@ -16,6 +15,7 @@
       font-family: 'Inter', sans-serif;
     }
 
+    /* KEEPING YOUR ORIGINAL PURPLE BACKGROUND */
     body {
       min-height: 100vh;
       background: radial-gradient(circle at top, #1a1028, #07040d 70%);
@@ -43,9 +43,6 @@
       padding: 18px 28px;
       background: rgba(0,0,0,0.55);
       backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     .brand {
@@ -53,28 +50,19 @@
       align-items: center;
       gap: 12px;
       font-weight: 800;
-      letter-spacing: 1px;
     }
 
     .brand img {
       width: 36px;
-      filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.35));
+      filter: brightness(0) invert(1);
     }
 
-    .pill {
-      background: rgba(255,255,255,0.1);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      opacity: 0.9;
-    }
-
-    /* --- HERO SECTION --- */
+    /* HERO SECTION */
     .hero {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 40px;
-      padding: 80px 8vw;
+      padding: 70px 8vw;
       align-items: center;
     }
 
@@ -82,118 +70,88 @@
       font-size: clamp(2.2rem, 4vw, 3.4rem);
       font-weight: 800;
       margin-bottom: 16px;
-      line-height: 1.1;
     }
 
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       opacity: 0.8;
-      max-width: 520px;
-      margin-bottom: 35px;
+      max-width: 500px;
+      margin-bottom: 30px;
     }
 
+    /* BUTTONS STYLE FROM IMAGE */
     .actions {
       display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
+      gap: 15px;
       margin-bottom: 30px;
     }
 
     .btn {
-      padding: 16px 36px;
-      border-radius: 14px;
+      padding: 12px 28px;
+      border-radius: 8px;
       border: none;
-      background: linear-gradient(135deg, #7b5cff, #a855f7);
-      color: white;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 12px 30px rgba(123,92,255,0.3);
-      transition: all .25s ease;
+      transition: 0.3s;
     }
 
-    .btn.secondary {
-      background: rgba(255,255,255,0.08);
-      box-shadow: none;
+    .btn-primary {
+      background: white;
+      color: black;
+    }
+
+    .btn-secondary {
+      background: #3f4147;
+      color: white;
     }
 
     .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(168,85,247,0.4);
+      transform: translateY(-2px);
+      opacity: 0.9;
     }
 
-    /* --- NEW: IP BADGES --- */
-    .server-status {
+    /* IP LIST STYLE FROM IMAGE */
+    .ip-list {
       display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
     }
 
-    .ip-badge {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .ip-row {
+      background: rgba(255, 255, 255, 0.1);
       padding: 12px 20px;
-      border-radius: 14px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       cursor: pointer;
-      transition: all 0.2s;
-      text-align: left;
+      transition: 0.2s;
     }
 
-    .ip-badge:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: #7b5cff;
-      transform: scale(1.02);
+    .ip-row:hover {
+      background: rgba(255, 255, 255, 0.15);
     }
 
-    .ip-label { display: block; font-size: 0.7rem; text-transform: uppercase; opacity: 0.5; margin-bottom: 4px; font-weight: 700; }
-    .ip-address { font-weight: 700; font-family: monospace; color: #a855f7; font-size: 0.95rem; }
+    .ip-text { font-family: monospace; font-weight: 600; color: #ccc; }
+    .ip-label { font-size: 0.9rem; font-weight: 500; }
 
-    /* --- HERO IMAGE --- */
+    /* IMAGE ANIMATION */
     .hero-visual img {
       width: 100%;
-      max-width: 400px;
-      animation: sword 3s ease-in-out infinite;
-      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+      max-width: 500px;
+      filter: drop-shadow(0 0 30px rgba(123, 92, 255, 0.3));
+      animation: float 4s ease-in-out infinite;
     }
 
-    @keyframes sword {
-      0%, 100% { transform: rotate(-5deg) translateY(0); }
-      50% { transform: rotate(5deg) translateY(-15px); }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
-    /* --- NEW: FEATURES GRID --- */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      padding: 80px 8vw;
-      background: rgba(0,0,0,0.25);
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 40px 30px;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      background: rgba(255, 255, 255, 0.07);
-      border-color: rgba(123, 92, 255, 0.4);
-    }
-
-    .feature-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
-    .feature-card h3 { margin-bottom: 12px; font-size: 1.4rem; }
-    .feature-card p { font-size: 0.95rem; opacity: 0.6; line-height: 1.6; }
-
-    /* MOBILE SETUP */
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 40px; }
-      .hero p { margin: 0 auto 30px; }
-      .actions, .server-status { justify-content: center; }
-      .hero-visual { order: -1; }
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .actions, .ip-list { align-items: center; margin: 0 auto 30px; }
     }
   </style>
 </head>
@@ -201,9 +159,8 @@
 
 <div class="topbar">
   <div class="brand">
-    <img src="image-removebg-preview.png" alt="MedievalSMP">
-    <span>MedievalSMP</span>
-    <div class="pill">Java & Bedrock</div>
+    <img src="image-removebg-preview.png" alt="Logo">
+    <span>Medieval SMP</span>
   </div>
 </div>
 
@@ -213,54 +170,34 @@
     <p>Join the ultimate medieval battlefield. Build your kingdom, master custom enchants, and dominate your enemies.</p>
 
     <div class="actions">
-      <button class="btn" onclick="copyIP('play.medievalsmp.com')">COPY JAVA IP</button>
-      <button class="btn secondary" onclick="window.open('https://discord.gg/yourlink')">DISCORD</button>
+      <button class="btn btn-primary" onclick="copyIP('play.medievalsmp.com')">COPY JAVA IP</button>
+      <button class="btn btn-secondary" onclick="window.open('https://discord.gg/yourlink')">DISCORD</button>
     </div>
 
-    <div class="server-status">
-      <div class="ip-badge" onclick="copyIP('play.medievalsmp.com')">
+    <div class="ip-list">
+      <div class="ip-row" onclick="copyIP('play.medievalsmp.com')">
         <span class="ip-label">Java Edition</span>
-        <span class="ip-address">play.medievalsmp.com</span>
+        <span class="ip-text">play.medievalsmp.com</span>
       </div>
-      <div class="ip-badge" onclick="copyIP('pe.medievalsmp.com')">
+      <div class="ip-row" onclick="copyIP('pe.medievalsmp.com')">
         <span class="ip-label">Bedrock (Port: 19132)</span>
-        <span class="ip-address">pe.medievalsmp.com</span>
+        <span class="ip-text">pe.medievalsmp.com</span>
       </div>
     </div>
   </div>
 
-  <div class="hero-visual">
-    <img src="minecraft_player_sword.png" alt="Minecraft Player">
-  </div>
-</section>
-
-<section class="features-grid">
-  <div class="feature-card">
-    <span class="feature-icon">⚔️</span>
-    <h3>Competitive PvP</h3>
-    <p>Balanced combat mechanics and custom arenas designed for the ultimate warrior experience.</p>
-  </div>
-  <div class="feature-card">
-    <span class="feature-icon">🏰</span>
-    <h3>Kingdom Wars</h3>
-    <p>Claim territory, build massive castles, and lead your faction to absolute victory.</p>
-  </div>
-  <div class="feature-card">
-    <span class="feature-icon">💎</span>
-    <h3>Custom Items</h3>
-    <p>Explore unique enchantments and rare medieval artifacts found nowhere else.</p>
-  </div>
+<div class="hero-visual">
+  <img src="hero-character.png" alt="Minecraft Character">
+</div>
 </section>
 
 <script>
-  /* Click to Copy Function */
   function copyIP(ip) {
     navigator.clipboard.writeText(ip).then(() => {
       alert("IP Copied: " + ip);
     });
   }
 
-  /* Snowflakes */
   setInterval(() => {
     const snow = document.createElement('div');
     snow.className = 'snowflake';
