@@ -18,7 +18,11 @@
 
     body {
       min-height: 100vh;
-      background: url('01edfa495abe8560a969185dd92c9fc1.jpg') center/cover no-repeat fixed;
+      background-color: #000; /* FALLBACK so screen is never white */
+      background-image: url('01edfa495abe8560a969185dd92c9fc1.jpg');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
       color: white;
       overflow-x: hidden;
     }
